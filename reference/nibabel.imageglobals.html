@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuroimaging in Python &#8212; NiBabel 3.2.1+100.g9fdf5e3e documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/nibabel.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="loadsave" href="nibabel.loadsave.html" />
+    <link rel="prev" title="imageclasses" href="nibabel.imageclasses.html" />
+  <meta name="keywords" content="nipy, neuroimaging, python, neuroscience">
+
+  </head><body>
+<div class="row" style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%;">
+  <div class="column" style="background-color: white; display: flex; flex-direction: column; flex: 0 0 140px; padding-left: 2px; padding-bottom:2px; padding-top:2px;">
+    <img src="../_static/nibabel-logo.svg" class="logo" alt="Logo" width="130px"/>
+  </div>
+  <div class="column" style="background-color: white; text-align: left; padding-left: 10px; padding-bottom:50px; padding-top:20px; background-repeat: no-repeat; display: flex; flex-direction: column; flex-basis: 100%; flex: 1;">
+    <h1>NiBabel</h1>
+    <h3 style="margin-top:-5px;color:#2f83c8">Access a cacophony of neuro-imaging file formats</h3>
+  </div>
+</div>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="nibabel.loadsave.html" title="loadsave"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nibabel.imageclasses.html" title="imageclasses"
+             accesskey="P">previous</a> |</li>
+  <li><a href="http://nipy.org/">Community</a> |&nbsp;</li>
+  <li><a href="../index.html">NiBabel Home</a> |&nbsp;</li>
+  <li><a href="https://mail.python.org/mailman/listinfo/neuroimaging">Mailing list</a> |&nbsp;</li>
+  <li><a href="legal.html">License</a> |&nbsp;</li>
+
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Neuroimaging in Python</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imageglobals</span></code></a><ul>
+<li><a class="reference internal" href="#errorlevel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorLevel</span></code></a></li>
+<li><a class="reference internal" href="#loggingoutputsuppressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingOutputSuppressor</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nibabel.imageclasses.html"
+                        title="previous chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">imageclasses</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nibabel.loadsave.html"
+                        title="next chapter"><code class="xref py py-mod docutils literal notranslate"><span class="pre">loadsave</span></code></a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/reference/nibabel.imageglobals.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-nibabel.imageglobals">
+<span id="imageglobals"></span><h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">imageglobals</span></code><a class="headerlink" href="#module-nibabel.imageglobals" title="Permalink to this headline">¶</a></h1>
+<p>Defaults for images and headers</p>
+<p>error_level is the problem level (see BatteryRunners) at which an error will be
+raised, by the batteryrunners <code class="docutils literal notranslate"><span class="pre">log_raise</span></code> method.  Thus a level of 0 will
+result in an error for any problem at all, and a level of 50 will mean no errors
+will be raised (unless someone’s put some strange problem_level &gt; 50 code in).</p>
+<p><code class="docutils literal notranslate"><span class="pre">logger</span></code> is the default logger (python log instance)</p>
+<p>To set the log level (log message appears for problem of level &gt;= log level),
+use e.g. <code class="docutils literal notranslate"><span class="pre">logger.level</span> <span class="pre">=</span> <span class="pre">40</span></code>.</p>
+<p>As for most loggers, if <code class="docutils literal notranslate"><span class="pre">logger.level</span> <span class="pre">==</span> <span class="pre">0</span></code> then a default log level is used -
+use <code class="docutils literal notranslate"><span class="pre">logger.getEffectiveLevel()</span></code> to see what that default is.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">logger.level</span> <span class="pre">=</span> <span class="pre">1</span></code> to see all messages.</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#nibabel.imageglobals.ErrorLevel" title="nibabel.imageglobals.ErrorLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ErrorLevel</span></code></a>(level)</p></td>
+<td><p>Context manager to set log error level</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#nibabel.imageglobals.LoggingOutputSuppressor" title="nibabel.imageglobals.LoggingOutputSuppressor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LoggingOutputSuppressor</span></code></a>()</p></td>
+<td><p>Context manager to prevent global logger from printing</p></td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="errorlevel">
+<h2><a class="reference internal" href="#nibabel.imageglobals.ErrorLevel" title="nibabel.imageglobals.ErrorLevel"><code class="xref py py-class docutils literal notranslate"><span class="pre">ErrorLevel</span></code></a><a class="headerlink" href="#errorlevel" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="nibabel.imageglobals.ErrorLevel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nibabel.imageglobals.</span></code><code class="sig-name descname"><span class="pre">ErrorLevel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nibabel.imageglobals.ErrorLevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Context manager to set log error level</p>
+<dl class="py method">
+<dt id="nibabel.imageglobals.ErrorLevel.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nibabel.imageglobals.ErrorLevel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="loggingoutputsuppressor">
+<h2><a class="reference internal" href="#nibabel.imageglobals.LoggingOutputSuppressor" title="nibabel.imageglobals.LoggingOutputSuppressor"><code class="xref py py-class docutils literal notranslate"><span class="pre">LoggingOutputSuppressor</span></code></a><a class="headerlink" href="#loggingoutputsuppressor" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="nibabel.imageglobals.LoggingOutputSuppressor">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">nibabel.imageglobals.</span></code><code class="sig-name descname"><span class="pre">LoggingOutputSuppressor</span></code><a class="headerlink" href="#nibabel.imageglobals.LoggingOutputSuppressor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Context manager to prevent global logger from printing</p>
+<dl class="py method">
+<dt id="nibabel.imageglobals.LoggingOutputSuppressor.__init__">
+<code class="sig-name descname"><span class="pre">__init__</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#nibabel.imageglobals.LoggingOutputSuppressor.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2006-2021, Chris Markiewicz &lt;neuroimaging@python.org&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+    </div>
+  </body>
+</html>
