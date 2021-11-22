@@ -188,7 +188,7 @@ def resample_from_to(from_img,
     to_vox2from_vox_1 = npl.inv(a_from_affine)
     print_("to_vox2from_vox_1", to_vox2from_vox_1)
     to_vox2from_vox_2 = to_vox2from_vox_1.dot(a_to_affine)
-    to_vox2from_vox = to_vox2from_vox2
+    to_vox2from_vox = to_vox2from_vox_2
     print_("to_vox2from_vox", to_vox2from_vox)
     rzs, trans = to_matvec(to_vox2from_vox)
     print_("rzs", rzs)
