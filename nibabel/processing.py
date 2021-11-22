@@ -118,6 +118,9 @@ def print_(name, array):
     if isinstance(array, np.ndarray):
         np.save(f"{name}.npy", array)
         os.system(f"sha256sum {name}.npy")
+        import sys, time
+        sys.stdout.flush()
+        time.sleep(0.1)
 
 
 def resample_from_to(from_img,
