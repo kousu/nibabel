@@ -185,7 +185,10 @@ def resample_from_to(from_img,
         raise AffineError('from_img must be at least 3D')
     a_from_affine = adapt_affine(from_img.affine, from_n_dim)
     print_("a_from_affine", a_from_affine)
-    to_vox2from_vox = npl.inv(a_from_affine).dot(a_to_affine)
+    to_vox2from_vox_1 = npl.inv(a_from_affine)
+    print_("to_vox2from_vox_1", to_vox2from_vox_1)
+    to_vox2from_vox_2 = to_vox2from_vox_1.dot(a_to_affine)
+    to_vox2from_vox = to_vox2from_vox2
     print_("to_vox2from_vox", to_vox2from_vox)
     rzs, trans = to_matvec(to_vox2from_vox)
     print_("rzs", rzs)
