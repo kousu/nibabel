@@ -112,6 +112,14 @@ def adapt_affine(affine, n_dim):
     return adapted
 
 
+def print_(name, array):
+    import os
+    print(f"{name} =", array)
+    if isinstance(array, np.ndarray):
+        np.save(f"{name}.npy", array)
+        os.system(f"sha256sum {name}.npy")
+
+
 def resample_from_to(from_img,
                      to_vox_map,
                      order=3,
@@ -162,15 +170,23 @@ def resample_from_to(from_img,
         to_shape, to_affine = to_vox_map.shape, to_vox_map.affine
     except AttributeError:
         to_shape, to_affine = to_vox_map
+    print_("to_shape", to_shape)
+    print_("to_affine", to_affine)
     a_to_affine = adapt_affine(to_affine, len(to_shape))
     if out_class is None:
         out_class = from_img.__class__
+    print_(f"out_class", out_class)
     from_n_dim = len(from_img.shape)
+    print_("from_n_dim", from_n_dim)
     if from_n_dim < 3:
         raise AffineError('from_img must be at least 3D')
     a_from_affine = adapt_affine(from_img.affine, from_n_dim)
+    print_("a_from_affine", a_from_affine)
     to_vox2from_vox = npl.inv(a_from_affine).dot(a_to_affine)
+    print_("to_vox2from_vox", to_vox2from_vox)
     rzs, trans = to_matvec(to_vox2from_vox)
+    print_("rzs", rzs)
+    print_("trans", trans)
     data = spnd.affine_transform(from_img.dataobj,
                                  rzs,
                                  trans,
@@ -178,6 +194,8 @@ def resample_from_to(from_img,
                                  order=order,
                                  mode=mode,
                                  cval=cval)
+    print_("data", data)
+    print_("from_img.header", from_img.header)
     return out_class(data, to_affine, from_img.header)
 
 
