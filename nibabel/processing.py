@@ -190,8 +190,7 @@ def resample_from_to(from_img,
     print_("a_from_affine", a_from_affine)
     to_vox2from_vox_1 = npl.inv(a_from_affine)
     print_("to_vox2from_vox_1", to_vox2from_vox_1)
-    #to_vox2from_vox_2 = to_vox2from_vox_1.dot(a_to_affine)
-    to_vox2from_vox_2 = to_vox2from_vox_1 @ a_to_affine # 'If both a and b are 2-D arrays, it is matrix multiplication, but using matmul or a @ b is preferred.'
+    to_vox2from_vox_2 = to_vox2from_vox_1.dot(a_to_affine)
     to_vox2from_vox = to_vox2from_vox_2
     print_("to_vox2from_vox", to_vox2from_vox)
     rzs, trans = to_matvec(to_vox2from_vox)
