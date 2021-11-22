@@ -176,6 +176,7 @@ def resample_from_to(from_img,
     print_("to_shape", to_shape)
     print_("to_affine", to_affine)
     a_to_affine = adapt_affine(to_affine, len(to_shape))
+    print_("a_to_affine", a_to_affine)
     if out_class is None:
         out_class = from_img.__class__
     print_(f"out_class", out_class)
