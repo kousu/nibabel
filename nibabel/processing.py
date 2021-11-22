@@ -116,6 +116,8 @@ def print_(name, array):
     import os
     print(f"{name} =", array)
     if isinstance(array, np.ndarray):
+        print(f"{name}.shape =", array.shape)
+        print(f"{name}.dtype =", array.dtype)
         np.save(f"{name}.npy", array)
         os.system(f"sha256sum {name}.npy")
         import sys, time
@@ -188,8 +190,6 @@ def resample_from_to(from_img,
     print_("a_from_affine", a_from_affine)
     to_vox2from_vox_1 = npl.inv(a_from_affine)
     print_("to_vox2from_vox_1", to_vox2from_vox_1)
-    print_("to_vox2from_vox_1.shape", to_vox2from_vox_1.shape)
-    print_("a_to_affine.shape", a_to_affine.shape)
     to_vox2from_vox_2 = to_vox2from_vox_1.dot(a_to_affine)
     to_vox2from_vox = to_vox2from_vox_2
     print_("to_vox2from_vox", to_vox2from_vox)
